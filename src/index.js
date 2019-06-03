@@ -15,7 +15,7 @@ inquirer
   .prompt([
     {
       type: "list",
-      message: "Pick the framework your using:",
+      message: "Pick the framework you're using:",
       name: "framework",
       choices: ["react", "react-native", "node"]
     }
