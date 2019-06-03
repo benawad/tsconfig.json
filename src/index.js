@@ -1,30 +1,29 @@
 #!/usr/bin/env node
 const inquirer = require("inquirer");
 const { writeFileSync } = require("fs");
+const tsconfigNode = require("./config/tsconfig.node.json");
+const tsconfigReact = require("./config/tsconfig.react.json");
+const tsconfigReactNative = require("./config/tsconfig.react-native.json");
 
 const tsconfigs = {
-  react: JSON.stringify(require("./config/tsconfig.react.json"), null, 2),
-  "react-native": JSON.stringify(
-    require("./config/tsconfig.react-native.json"),
-    null,
-    2
-  ),
-  node: JSON.stringify(require("./config/tsconfig.react-native.json"), null, 2)
+  "node": tsconfigNode,
+  "react": tsconfigReact,
+  "react-native": tsconfigReactNative,
 };
 
-inquirer
-  .prompt([
+(async () => {
+  const { framework } = await inquirer.prompt([
     {
       type: "list",
-      message: "Pick the framework your using:",
+      message: "Pick the framework you're using:",
       name: "framework",
       choices: ["react", "react-native", "node"]
     }
-  ])
-  .then(({ framework }) => {
-    const tsconfigToWrite = tsconfigs[framework];
+  ]);
 
-    const cwd = process.cwd();
-    writeFileSync(cwd + "/tsconfig.json", tsconfigToWrite);
-    console.log("tsconfig.json successfully created");
-  });
+  const cwd = process.cwd();
+
+  writeFileSync(`${cwd}/tsconfig.json`, JSON.stringify(tsconfigs[framework], null, 2));
+
+  console.log("tsconfig.json successfully created");
+})()
