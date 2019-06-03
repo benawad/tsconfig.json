@@ -1,15 +1,29 @@
 {
   "name": "tsconfig.json",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.5",
+  "description": "Quickly create an opinionated tsconfig.json",
+  "main": "src/index.js",
+  "bin": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "tsconfig",
+    "tsconfig.json",
+    "typescript",
+    "ts"
+  ],
+  "author": "Ben Awad",
+  "license": "MIT",
   "dependencies": {
     "inquirer": "^6.3.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benawad/tsconfig.json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benawad/tsconfig.json/issues"
+  },
+  "homepage": "https://github.com/benawad/tsconfig.json#readme"
 }
