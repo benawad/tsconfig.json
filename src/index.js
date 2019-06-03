@@ -10,19 +10,19 @@ const tsconfigs = {
   "react-native": tsconfigReactNative,
 };
 
-inquirer
-  .prompt([
+(async () => {
+  const { framework } = await inquirer.prompt([
     {
       type: "list",
       message: "Pick the framework you're using:",
       name: "framework",
       choices: ["react", "react-native", "node"]
     }
-  ])
-  .then(({ framework }) => {
-    const cwd = process.cwd();
+  ]);
 
-    writeFileSync(`${cwd}/tsconfig.json`, JSON.stringify(tsconfigs[framework], null, 2));
+  const cwd = process.cwd();
 
-    console.log("tsconfig.json successfully created");
-  });
+  writeFileSync(`${cwd}/tsconfig.json`, JSON.stringify(tsconfigs[framework], null, 2));
+
+  console.log("tsconfig.json successfully created");
+})()
