@@ -1,6 +1,6 @@
 {
   "name": "tsconfig.json",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Quickly create an opinionated tsconfig.json",
   "main": "src/index.js",
   "bin": "src/index.js",
