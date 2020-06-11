@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 const inquirer = require("inquirer");
+const path = require('path');
 const { writeFile, readdir, readFile } = require("fs").promises;
 
 const configFiles = {};
-const configFolderPath = __dirname + '\\config'; 
+const configFolderPath = path.resolve(__dirname, 'config');
+
 
 (async () => {
 
@@ -13,7 +15,7 @@ const configFolderPath = __dirname + '\\config';
     // framework name is situated between 2 dots eg- react between 2 '.'(s)
     const [start, end] = getAllRegexIndexes(i, /\./g);
     const prop = i.slice(start + 1, end);
-    configFiles[prop] = configFolderPath + '/' + i;
+    configFiles[prop] = path.join(configFolderPath, i);
   }
 
   const { framework } = await inquirer.prompt([
@@ -27,9 +29,9 @@ const configFolderPath = __dirname + '\\config';
 
   const config = await readFile(configFiles[framework]).catch(console.log);
 
-  const cwd = process.cwd();
+  const tsconfig = path.join(process.cwd(), 'tsconfig.json');
 
-  await writeFile(`${cwd}/tsconfig.json`, JSON.stringify(config.toString(), null, 2));
+  await writeFile(tsconfig, JSON.stringify(config.toString(), null, 2));
  
   console.log("tsconfig.json successfully created");
 })()
