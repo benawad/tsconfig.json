@@ -13,9 +13,8 @@ const configFolderPath = path.resolve(__dirname, 'config');
 
   for (let i of files) {
     // framework name is situated between 2 dots eg- react between 2 '.'(s)
-    const [start, end] = getAllRegexIndexes(i, /\./g);
-    const prop = i.slice(start + 1, end);
-    configFiles[prop] = path.join(configFolderPath, i);
+    const frameworkName = i.split('.')[1];
+    configFiles[frameworkName] = path.join(configFolderPath, i);
   }
 
   const { framework } = await inquirer.prompt([
@@ -35,16 +34,3 @@ const configFolderPath = path.resolve(__dirname, 'config');
  
   console.log("tsconfig.json successfully created");
 })()
-
-
-
-// should we just call /\./g twice ?
-function getAllRegexIndexes(str, regexp) {
-  let container = [];
-  while(container[container.length - 1] !== null) {
-    let index = regexp.exec(str); // .exec returns null when no match is found to we have to watch out for it to avoid error without executing .exec twice
-    index = (index) ? index.index : null ;
-    container.push(index);
-  }
-  return container.slice(0, container.length - 1);
-}
