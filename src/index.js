@@ -1,29 +1,36 @@
 #!/usr/bin/env node
 const inquirer = require("inquirer");
-const { writeFileSync } = require("fs");
-const tsconfigNode = require("./config/tsconfig.node.json");
-const tsconfigReact = require("./config/tsconfig.react.json");
-const tsconfigReactNative = require("./config/tsconfig.react-native.json");
+const path = require('path');
+const { writeFile, readdir, readFile } = require("fs").promises;
 
-const tsconfigs = {
-  "node": tsconfigNode,
-  "react": tsconfigReact,
-  "react-native": tsconfigReactNative,
-};
+const configFiles = {};
+const configFolderPath = path.resolve(__dirname, 'config');
+
 
 (async () => {
+
+  const files = await readdir(configFolderPath).catch(console.log);
+
+  for (let i of files) {
+    // framework name is situated between 2 dots eg- react between 2 '.'(s)
+    const frameworkName = i.split('.')[1];
+    configFiles[frameworkName] = path.join(configFolderPath, i);
+  }
+
   const { framework } = await inquirer.prompt([
     {
       type: "list",
       message: "Pick the framework you're using:",
       name: "framework",
-      choices: ["react", "react-native", "node"]
+      choices: Object.keys(configFiles),
     }
   ]);
 
-  const cwd = process.cwd();
+  const config = await readFile(configFiles[framework]).catch(console.log);
 
-  writeFileSync(`${cwd}/tsconfig.json`, JSON.stringify(tsconfigs[framework], null, 2));
+  const tsconfig = path.join(process.cwd(), 'tsconfig.json');
 
+  await writeFile(tsconfig, JSON.stringify(config.toString(), null, 2));
+ 
   console.log("tsconfig.json successfully created");
 })()
