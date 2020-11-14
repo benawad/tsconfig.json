@@ -3,10 +3,10 @@
     "target": "es6",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
-
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
