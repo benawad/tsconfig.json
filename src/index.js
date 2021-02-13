@@ -54,7 +54,6 @@ const configFolderPath = path.resolve(__dirname, 'config');
         };
       }, JSON.parse(config.toString()));
 
-      config = JSON.stringify(configObj, null, 2);
     }
   }
 
