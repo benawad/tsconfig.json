@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "bin": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "tsconfig",
@@ -25,5 +26,14 @@
   "bugs": {
     "url": "https://github.com/benawad/tsconfig.json/issues"
   },
-  "homepage": "https://github.com/benawad/tsconfig.json#readme"
+  "publishConfig": {
+    "access": "public",
+    "branches": [
+      "master"
+    ]
+  },
+  "homepage": "https://github.com/benawad/tsconfig.json#readme",
+  "devDependencies": {
+    "semantic-release": "^17.4.4"
+  }
 }

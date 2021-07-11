@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 12
       - name: Install dependencies
-        run: yarn
+        run: npm ci
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
