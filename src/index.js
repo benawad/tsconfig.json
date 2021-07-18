@@ -20,7 +20,7 @@ const configFolderPath = path.resolve(__dirname, 'config');
   const { framework } = await inquirer.prompt([
     {
       type: "list",
-      message: "Pick the framework you're using:",
+      message: "Pick the framework you're using/the project you are building:",
       name: "framework",
       choices: Object.keys(configFiles),
     }
