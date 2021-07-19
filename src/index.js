@@ -58,7 +58,7 @@ const configFolderPath = path.resolve(__dirname, 'config');
     }
   }
 
-  await writeFile(tsconfig, config.toString());
+  await writeFile(tsconfig, config.toString()).catch(err=>console.log(err));
 
   console.log("tsconfig.json successfully created");
 })();
