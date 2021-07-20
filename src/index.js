@@ -62,6 +62,6 @@ const configFolderPath = path.resolve(__dirname, 'config');
     console.log(err);
     process.exit();
   });
-  
+
   console.log("tsconfig.json successfully created");
 })();
