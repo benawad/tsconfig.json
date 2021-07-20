@@ -1,34 +1,37 @@
 #!/usr/bin/env node
-const inquirer = require("inquirer");
-const path = require('path');
-const { writeFile, readdir, readFile } = require("fs").promises;
+import inquirer from "inquirer";
+import { resolve, join, dirname } from "path";
+import { promises } from "fs";
+import { fileURLToPath } from "url";
+
+const { writeFile, readdir, readFile } = promises;
+const { prompt } = inquirer;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const configFiles = {};
-const configFolderPath = path.resolve(__dirname, 'config');
-
+const configFolderPath = resolve(__dirname, "config");
 
 (async () => {
-
   const files = await readdir(configFolderPath).catch(console.log);
 
   for (let i of files) {
     // framework name is situated between 2 dots eg- react between 2 '.'(s)
-    const frameworkName = i.split('.')[1];
-    configFiles[frameworkName] = path.join(configFolderPath, i);
+    const frameworkName = i.split(".")[1];
+    configFiles[frameworkName] = join(configFolderPath, i);
   }
 
-  const { framework } = await inquirer.prompt([
+  const { framework } = await prompt([
     {
       type: "list",
       message: "Pick the framework you're using:",
       name: "framework",
       choices: Object.keys(configFiles),
-    }
+    },
   ]);
 
   let config = await readFile(configFiles[framework]).catch(console.log);
 
-  const tsconfig = path.join(process.cwd(), 'tsconfig.json');
+  const tsconfig = join(process.cwd(), "tsconfig.json");
 
   if (framework === "node") {
     const reg = new RegExp(/(?<=v)(\d+)/);

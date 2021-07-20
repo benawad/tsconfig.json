@@ -4,6 +4,7 @@
   "description": "Quickly create an opinionated tsconfig.json",
   "main": "src/index.js",
   "bin": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "semantic-release": "semantic-release"
