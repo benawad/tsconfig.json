@@ -17,20 +17,20 @@ const configFolderPath = path.resolve(__dirname, 'config');
     configFiles[frameworkName] = path.join(configFolderPath, i);
   }
 
-  const { framework } = await inquirer.prompt([
+  const { technology } = await inquirer.prompt([
     {
       type: "list",
-      message: "Pick the framework you're using:",
-      name: "framework",
+      message: "Pick the technology you're using:",
+      name: "technology",
       choices: Object.keys(configFiles),
     }
   ]);
 
-  let config = await readFile(configFiles[framework]).catch(console.log);
+  let config = await readFile(configFiles[technology]).catch(console.log);
 
   const tsconfig = path.join(process.cwd(), 'tsconfig.json');
 
-  if (framework === "node") {
+  if (technology === "node") {
     const reg = new RegExp(/(?<=v)(\d+)/);
     const version = parseInt(reg.exec(process.version)[0]);
 
@@ -58,7 +58,7 @@ const configFolderPath = path.resolve(__dirname, 'config');
     }
   }
 
-  await writeFile(tsconfig, config.toString());
+  await writeFile(tsconfig, config.toString()).catch(err=>console.log(err));
 
   console.log("tsconfig.json successfully created");
 })();
