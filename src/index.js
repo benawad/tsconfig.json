@@ -5,7 +5,6 @@ import { promises } from "fs";
 import { fileURLToPath } from "url";
 
 const { writeFile, readdir, readFile } = promises;
-const { prompt } = inquirer;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const configFiles = {};
@@ -20,7 +19,7 @@ const configFolderPath = resolve(__dirname, "config");
     configFiles[frameworkName] = join(configFolderPath, i);
   }
 
-  const { framework } = await prompt([
+  const { framework } = await inquirer.prompt([
     {
       type: "list",
       message: "Pick the framework you're using:",
