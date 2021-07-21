@@ -10,7 +10,7 @@ yarn add -D tsconfig.json
 npx tsconfig.json
 ```
 
-Instally globally(recommended if you are using typescript very often):
+Install globally(recommended if you are using typescript very often):
 ```bash
 yarn global add tsconfig.json
 # now you don't have to prefix this command with npx!
