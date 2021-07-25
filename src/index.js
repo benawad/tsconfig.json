@@ -39,7 +39,7 @@ const configFolderPath = path.resolve(__dirname, 'config');
       const updateConfig = {
         allowSyntheticDefaultImports: true,
         lib: ["es2020"],
-        module: "es2020",
+        module: "commonjs",
         moduleResolution: "node",
         target: "es2020",
       };
