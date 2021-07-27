@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
     "jsx": "react-native",
-    "lib": ["es6", "esnext.asynciterable"],
+    "lib": ["es6", "esnext.asynciterable", "es2017"],
     "strict": true,
     "esModuleInterop": true,
     "rootDir": "src",
@@ -17,6 +17,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true
   }
 }
