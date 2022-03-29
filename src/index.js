@@ -6,10 +6,12 @@ const { writeFile, readdir, readFile } = require("fs").promises;
 const configFiles = {};
 const configFolderPath = path.resolve(__dirname, 'config');
 
+const defaultTechnology = { "technology": "node(Default)" };
 
 (async () => {
 
   const files = await readdir(configFolderPath).catch(console.log);
+  const useDefault = process.argv[2] === "-y";
 
   for (let i of files) {
     // framework name is situated between 2 dots eg- react between 2 '.'(s)
@@ -17,14 +19,14 @@ const configFolderPath = path.resolve(__dirname, 'config');
     configFiles[frameworkName] = path.join(configFolderPath, i);
   }
 
-  const { technology } = await inquirer.prompt([
+  const { technology } = useDefault ? defaultTechnology : await inquirer.prompt([
     {
       type: "list",
       message: "Pick the technology you're using:",
       name: "technology",
       choices: Object.keys(configFiles),
     }
-  ]);
+  ])
 
   let config = await readFile(configFiles[technology]).catch(console.log);
 
@@ -58,7 +60,7 @@ const configFolderPath = path.resolve(__dirname, 'config');
     }
   }
 
-  await writeFile(tsconfig, config.toString()).catch(err=> {
+  await writeFile(tsconfig, config.toString()).catch(err => {
     console.log(err);
     process.exit();
   });
