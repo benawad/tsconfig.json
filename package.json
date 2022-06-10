@@ -34,6 +34,6 @@
   },
   "homepage": "https://github.com/benawad/tsconfig.json#readme",
   "devDependencies": {
-    "semantic-release": "^17.4.4"
+    "semantic-release": "^19.0.3"
   }
 }
