@@ -35,7 +35,6 @@
       "@component/*":["components/*", "src/components/*"],
       "@util/*":["lib/*","utils/*","util/*", "src/lib/*", "src/utils/*", "src/util/*"],
       "@lib/*":["lib/*","utils/*","util/*", "src/lib/*", "src/utils/*", "src/util/*"],
-      "@page/*":["pages/*", "src/pages/*"],
   },
   "include": [
     "next-env.d.ts",
